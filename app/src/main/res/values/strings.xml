@@ -1,0 +1,81 @@
+<resources>
+    <string name="app_name">Hexis Client</string>
+    <string name="fragment_settings">Settings</string>
+    <string name="action_create_habit">Create Habit</string>
+    <string name="fragment_view_habits">View Habits</string>
+    <string name="habit_1">Smoking</string>
+    <string name="habit_2">Nail Biting</string>
+    <string name="habit_3">Hair Pulling</string>
+    <string name="habit_4">Prolonged Sitting</string>
+    <string name="fragment_logs">Activity Logs</string>
+    <string name="fragment_about">About</string>
+
+    <string name="habit">Habit</string>
+
+    <string-array name="habit_type">
+        <item>Good Habit</item>
+        <item>Bad Habit</item>
+    </string-array>
+
+    <string name="zap_text">Zap</string>
+
+    <string name="number_of_zaps">No. of zaps</string>
+
+    <string-array name="zap_spinner">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <string name="beep_text">Beep</string>
+
+    <string name="number_of_beeps">No. of beeps</string>
+    <string-array name="beep_spinner">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <string name="time_option">When should we remind you?</string>
+
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="language">Language</string>
+
+    <string-array name="language_options">
+        <item>English</item>
+        <item>Sinhala</item>
+        <item>Italian</item>
+    </string-array>
+
+    <string name="updates">Facebook status updates</string>
+
+    <string name="notifications">Notifications</string>
+
+    <string-array name="menu_drawer">
+        <item>@string/fragment_view_habits</item>
+        <item>@string/fragment_logs</item>
+        <item>@string/fragment_settings</item>
+        <item>@string/fragment_about</item>
+    </string-array>
+
+    <string name="no_habits">No logs to display</string>
+
+
+    <string name="open_drawer">Open drawer</string>
+    <string name="close_drawer">Close drawer</string>
+
+    <item name="switcher_habit_1" type="id">switcher_habit_1</item>
+    <item name="switcher_habit_2" type="id">switcher_habit_2</item>
+    <item name="switcher_habit_3" type="id">switcher_habit_3</item>
+    <item name="switcher_habit_4" type="id">switcher_habit_4</item>
+
+    <string name="title_top">Habit fragment</string>
+    <string name="habit_type">Habit Type</string>
+
+    <string name="add_habit">Add Habit</string>
+
+</resources>

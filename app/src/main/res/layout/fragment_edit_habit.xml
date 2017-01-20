@@ -1,0 +1,90 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="hexis.pegasus.com.hexisclient.EditHabitFragment">
+
+
+    <Switch
+        android:text="@string/zap_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="28dp"
+        android:id="@+id/zap_text"
+        android:checked="true"
+        android:onClick="onCheckedChanged" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="29dp"
+        android:id="@+id/zap_spinner"
+        android:layout_below="@+id/zap_text"
+        android:layout_toEndOf="@+id/zap_view"
+        android:layout_marginStart="55dp"
+        android:entries="@array/zap_spinner" />
+
+    <TextView
+        android:text="@string/number_of_zaps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:id="@+id/zap_view"
+        android:layout_alignBottom="@+id/zap_spinner"
+        android:layout_alignStart="@+id/zap_text"
+        android:textAppearance="@android:style/TextAppearance"
+        android:layout_alignTop="@+id/zap_spinner" />
+
+    <Switch
+        android:text="@string/beep_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/zap_view"
+        android:layout_alignStart="@+id/zap_text"
+        android:layout_marginTop="48dp"
+        android:id="@+id/beep_text"
+        android:checked="true"
+        android:onClick="onCheckedChanged" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/beep_view"
+        android:layout_alignStart="@+id/zap_spinner"
+        android:id="@+id/beep_spinner"
+        android:entries="@array/beep_spinner" />
+
+    <TextView
+        android:text="@string/number_of_beeps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="31dp"
+        android:id="@+id/beep_view"
+        android:textAppearance="@android:style/TextAppearance"
+        android:layout_below="@+id/beep_text"
+        android:layout_alignStart="@+id/zap_view" />
+
+    <Button
+        android:text="@string/save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/save"
+        android:layout_marginTop="56dp"
+        android:layout_below="@+id/beep_view"
+        android:layout_toStartOf="@+id/zap_spinner"
+        android:onClick="onSaveClick"/>
+
+    <Button
+        android:text="@string/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cancel"
+        android:layout_alignBaseline="@+id/save"
+        android:layout_alignBottom="@+id/save"
+        android:layout_toEndOf="@+id/beep_view"
+        android:layout_marginStart="30dp"
+        android:onClick="onCancelClick"/>
+</RelativeLayout>

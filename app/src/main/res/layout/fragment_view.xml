@@ -1,0 +1,48 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Switch
+        android:id="@id/switcher_habit_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/habit_3"
+        android:checked="false"
+        android:layout_marginTop="48dp"
+        android:layout_below="@+id/switcher_habit_2"
+        android:layout_alignStart="@+id/switcher_habit_1" />
+
+    <Switch
+        android:id="@id/switcher_habit_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/habit_4"
+        android:checked="false"
+        android:layout_below="@+id/switcher_habit_3"
+        android:layout_alignStart="@+id/switcher_habit_2"
+        android:layout_marginTop="48dp" />
+
+    <Switch
+        android:id="@id/switcher_habit_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/habit_2"
+        android:checked="false"
+        android:layout_marginTop="44dp"
+        android:layout_below="@+id/switcher_habit_1"
+        android:layout_alignStart="@+id/switcher_habit_1" />
+
+    <Switch
+        android:id="@+id/switcher_habit_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/habit_1"
+        android:checked="false"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>

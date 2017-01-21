@@ -98,12 +98,12 @@ public class HabitActivity extends Activity {
         }else{
             habit.setNoOfTimesToBeep(0);
         }
-        Log.d("Respoms", "is Bad "+habit.isBadHabit()+" No of zap "+habit.getNoOfTimesToZap()+" No of beep "+habit.getNoOfTimesToBeep()+" time "+habit.getHourToGiveReminer()+":"+habit.getMinuteToGiveReminder()+" zap state "+habit.isZapSwitchState()+" beep state "+habit.isBeepSwitchState());
+        Log.d("Response", "is Bad "+habit.isBadHabit()+" No of zap "+habit.getNoOfTimesToZap()+" No of beep "+habit.getNoOfTimesToBeep()+" time "+habit.getHourToGiveReminer()+":"+habit.getMinuteToGiveReminder()+" zap state "+habit.isZapSwitchState()+" beep state "+habit.isBeepSwitchState());
         RequestQueue queue= Volley.newRequestQueue(this);
 
         final String url = "http://cybertechparadise.com/addHabit.php?habitName="+habit.getHabitName()+"&habitType="+habit.isBadHabit()+"&timeHours="+habit.getHourToGiveReminer()+"&timeMinutes="+habit.getMinuteToGiveReminder()+"&zapState="+habit.isZapSwitchState()+"&beepState="+habit.isBeepSwitchState()+"&noOfBeeps="+habit.getNoOfTimesToBeep()+"&noOfZaps="+habit.getNoOfTimesToZap();
 
-// prepare the Request
+    // prepare the Request
         JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, (String)null,
                 new Response.Listener<JSONObject>()
                 {

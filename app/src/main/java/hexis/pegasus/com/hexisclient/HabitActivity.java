@@ -22,7 +22,7 @@ import android.widget.TimePicker;
 import org.json.JSONObject;
 
 public class HabitActivity extends Activity {
-
+//test comment
     private Spinner optionSpinner;
     private Switch optionSwitch;
     private int selectedHour = 5;

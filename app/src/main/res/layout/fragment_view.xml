@@ -22,7 +22,8 @@
         android:checked="false"
         android:layout_below="@+id/switcher_habit_3"
         android:layout_alignStart="@+id/switcher_habit_2"
-        android:layout_marginTop="48dp" />
+        android:layout_marginTop="48dp"
+        android:onClick="onProlongedSittingClicked"/>
 
     <Switch
         android:id="@id/switcher_habit_2"

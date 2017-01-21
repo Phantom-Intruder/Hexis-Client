@@ -4,10 +4,16 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothSocket;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.util.CircularArray;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
@@ -16,7 +22,16 @@ import android.widget.ListView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.content.res.Configuration;
+import android.widget.Toast;
 import android.widget.VideoView;
+
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Set;
+import java.util.UUID;
+
+import static android.content.ContentValues.TAG;
 
 public class MainActivity extends Activity {
 
@@ -25,6 +40,8 @@ public class MainActivity extends Activity {
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
     private int currentPosition = 0;
+    private BluetoothAdapter BA;
+    private Set<BluetoothDevice> pairedDevices;
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener{
         @Override
@@ -127,6 +144,43 @@ public class MainActivity extends Activity {
     public void onSaveInstanceState(Bundle outState){
         super.onSaveInstanceState(outState);
         outState.putInt("position", currentPosition);
+    }
+
+    public void onProlongedSittingClicked(View view){
+        BA = BluetoothAdapter.getDefaultAdapter();
+        Intent turnOn = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+        startActivityForResult(turnOn, 0);
+        connect(BA);
+
+    }
+
+    public void connect(BluetoothAdapter BA){
+        String address = "98:D3:34:90:96:36";
+        BluetoothDevice device = BA.getRemoteDevice(address);
+        BluetoothSocket tmp = null;
+        BluetoothSocket mmSocket = null;
+
+        // Get a BluetoothSocket for a connection with the
+        // given BluetoothDevice
+        try {
+            TelephonyManager tManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+            String MY_UUID = tManager.getDeviceId();
+            Log.d("UUID", MY_UUID);
+            tmp = device.createRfcommSocketToServiceRecord(UUID.fromString(MY_UUID));
+            Method m = device.getClass().getMethod("createRfcommSocket", new Class[] {int.class});
+            tmp = (BluetoothSocket) m.invoke(device, 1);
+        } catch (IOException e) {
+            Log.e(TAG, "create() failed", e);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        Toast.makeText(this, "Bluetooth has turned on "+ tmp.isConnected(), Toast.LENGTH_SHORT).show();
+
+        mmSocket = tmp;
     }
 
     private void setActionBarTitle(int position){

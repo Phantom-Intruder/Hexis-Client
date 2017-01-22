@@ -64,6 +64,7 @@
 
     <string name="no_habits">No logs to display</string>
 
+    <string name="connect">Connect to device</string>
 
     <string name="open_drawer">Open drawer</string>
     <string name="close_drawer">Close drawer</string>

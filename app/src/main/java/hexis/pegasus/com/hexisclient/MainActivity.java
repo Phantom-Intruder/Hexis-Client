@@ -9,6 +9,7 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.util.CircularArray;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -28,6 +29,9 @@ import android.widget.VideoView;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -42,6 +46,10 @@ public class MainActivity extends Activity {
     private int currentPosition = 0;
     private BluetoothAdapter BA;
     private Set<BluetoothDevice> pairedDevices;
+
+    public void connectToDevice(View view) {
+        startActivity(new Intent(Settings.ACTION_BLUETOOTH_SETTINGS));
+    }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener{
         @Override
@@ -150,7 +158,14 @@ public class MainActivity extends Activity {
         BA = BluetoothAdapter.getDefaultAdapter();
         Intent turnOn = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
         startActivityForResult(turnOn, 0);
-        connect(BA);
+        pairedDevices = BA.getBondedDevices();
+
+        ArrayList<String> s = new ArrayList<String>();
+        for(BluetoothDevice bt : pairedDevices)
+            s.add(bt.getName());
+        Log.d("S", Arrays.toString(s.toArray()));
+        String deviceName = "HC-06";
+        //connect(BA);
 
     }
 

@@ -44,41 +44,41 @@ public class HabitActivity extends Activity {
         optionSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    if ((optionSwitch.getId()) == R.id.zap_text){
+                    if ((optionSwitch.getId()) == R.id.zap_text) {
                         optionSpinner = (Spinner) findViewById(R.id.zap_spinner);
                         optionSpinner.setEnabled(true);
                         zapSwitchState = true;
-                    }else{
+                    } else {
                         optionSpinner = (Spinner) findViewById(R.id.beep_spinner);
                         optionSpinner.setEnabled(true);
                         beepSwitchState = true;
                     }
-                    optionSpinner= null;
+                    optionSpinner = null;
                 } else {
                     // The switch is disabled
-                    if ((optionSwitch.getId()) == R.id.zap_text){
+                    if ((optionSwitch.getId()) == R.id.zap_text) {
                         optionSpinner = (Spinner) findViewById(R.id.zap_spinner);
                         optionSpinner.setEnabled(false);
                         zapSwitchState = false;
-                    }else{
+                    } else {
                         optionSpinner = (Spinner) findViewById(R.id.beep_spinner);
                         optionSpinner.setEnabled(false);
                         beepSwitchState = false;
                     }
-                    optionSpinner= null;
+                    optionSpinner = null;
                 }
             }
         });
     }
 
-    public void onSaveClick(View view){
+    public void onSaveClick(View view) {
         final Habit habit = new Habit();
-        EditText habitName = (EditText)findViewById(R.id.habit_type_input);
+        EditText habitName = (EditText) findViewById(R.id.habit_type_input);
         habit.setHabitName(habitName.getText().toString());
-        Spinner habitType = (Spinner)findViewById(R.id.habit_option);
-        if((habitType.getSelectedItem().toString()).equalsIgnoreCase("Good habit")){
+        Spinner habitType = (Spinner) findViewById(R.id.habit_option);
+        if ((habitType.getSelectedItem().toString()).equalsIgnoreCase("Good habit")) {
             habit.setBadHabit(false);
-        }else {
+        } else {
             habit.setBadHabit(true);
         }
         timeHandleMethod(findViewById(R.id.time_picker));
@@ -86,35 +86,33 @@ public class HabitActivity extends Activity {
         habit.setMinuteToGiveReminder(selectedMinute);
         habit.setZapSwitchState(zapSwitchState);
         habit.setBeepSwitchState(beepSwitchState);
-        if (zapSwitchState){
+        if (zapSwitchState) {
             Spinner NoOfTimesToZap = (Spinner) findViewById(R.id.zap_spinner);
             habit.setNoOfTimesToZap(Integer.parseInt(NoOfTimesToZap.getSelectedItem().toString()));
-        }else{
+        } else {
             habit.setNoOfTimesToZap(0);
         }
-        if (beepSwitchState){
+        if (beepSwitchState) {
             Spinner NoOfTimesToBeep = (Spinner) findViewById(R.id.beep_spinner);
             habit.setNoOfTimesToZap(Integer.parseInt(NoOfTimesToBeep.getSelectedItem().toString()));
-        }else{
+        } else {
             habit.setNoOfTimesToBeep(0);
         }
-        Log.d("Response", "is Bad "+habit.isBadHabit()+" No of zap "+habit.getNoOfTimesToZap()+" No of beep "+habit.getNoOfTimesToBeep()+" time "+habit.getHourToGiveReminer()+":"+habit.getMinuteToGiveReminder()+" zap state "+habit.isZapSwitchState()+" beep state "+habit.isBeepSwitchState());
-        RequestQueue queue= Volley.newRequestQueue(this);
+        Log.d("Response", "is Bad " + habit.isBadHabit() + " No of zap " + habit.getNoOfTimesToZap() + " No of beep " + habit.getNoOfTimesToBeep() + " time " + habit.getHourToGiveReminer() + ":" + habit.getMinuteToGiveReminder() + " zap state " + habit.isZapSwitchState() + " beep state " + habit.isBeepSwitchState());
+        RequestQueue queue = Volley.newRequestQueue(this);
 
-        final String url = "http://cybertechparadise.com/addHabit.php?habitName="+habit.getHabitName()+"&habitType="+habit.isBadHabit()+"&timeHours="+habit.getHourToGiveReminer()+"&timeMinutes="+habit.getMinuteToGiveReminder()+"&zapState="+habit.isZapSwitchState()+"&beepState="+habit.isBeepSwitchState()+"&noOfBeeps="+habit.getNoOfTimesToBeep()+"&noOfZaps="+habit.getNoOfTimesToZap();
+        final String url = "http://cybertechparadise.com/addHabit.php?habitName=" + habit.getHabitName() + "&habitType=" + habit.isBadHabit() + "&timeHours=" + habit.getHourToGiveReminer() + "&timeMinutes=" + habit.getMinuteToGiveReminder() + "&zapState=" + habit.isZapSwitchState() + "&beepState=" + habit.isBeepSwitchState() + "&noOfBeeps=" + habit.getNoOfTimesToBeep() + "&noOfZaps=" + habit.getNoOfTimesToZap();
 
-    // prepare the Request
-        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, (String)null,
-                new Response.Listener<JSONObject>()
-                {
+        // prepare the Request
+        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, (String) null,
+                new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         // display response
                         Log.d("Response", response.toString());
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         //Log.d("Error.Response", response);
@@ -127,7 +125,7 @@ public class HabitActivity extends Activity {
         finish();
     }
 
-    public void onCancelClick(View view){
+    public void onCancelClick(View view) {
         finish();
     }
 
@@ -137,7 +135,7 @@ public class HabitActivity extends Activity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             selectedHour = timePicker.getHour();
             selectedMinute = timePicker.getMinute();
-        }else {
+        } else {
             selectedHour = timePicker.getCurrentHour();
             selectedMinute = timePicker.getCurrentMinute();
         }

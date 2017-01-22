@@ -160,20 +160,20 @@ public class MainActivity extends Activity {
 
     public void onProlongedSittingClicked(View view){
 
-        if (BA.isEnabled()) {
-            pairedDevices = BA.getBondedDevices();
-
-            ArrayList<String> s = new ArrayList<String>();
-            for(BluetoothDevice bt : pairedDevices)
-                s.add(bt.getName());
-            Log.d("S", Arrays.toString(s.toArray()));
-            String deviceName = "HC-06";
-        }
-        else
-        {
-            BA = BluetoothAdapter.getDefaultAdapter();
-            startActivity(new Intent(Settings.ACTION_BLUETOOTH_SETTINGS));
-        }
+//        if (BA.isEnabled()) {
+//            pairedDevices = BA.getBondedDevices();
+//
+//            ArrayList<String> s = new ArrayList<String>();
+//            for(BluetoothDevice bt : pairedDevices)
+//                s.add(bt.getName());
+//            Log.d("S", Arrays.toString(s.toArray()));
+//            String deviceName = "HC-06";
+//        }
+//        else
+//        {
+//            BA = BluetoothAdapter.getDefaultAdapter();
+//            startActivity(new Intent(Settings.ACTION_BLUETOOTH_SETTINGS));
+//        }
 
         //connect(BA);
 

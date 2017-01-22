@@ -48,6 +48,7 @@ public class MainActivity extends Activity {
     private Set<BluetoothDevice> pairedDevices;
 
     public void connectToDevice(View view) {
+        BA = BluetoothAdapter.getDefaultAdapter();
         startActivity(new Intent(Settings.ACTION_BLUETOOTH_SETTINGS));
     }
 
@@ -155,16 +156,22 @@ public class MainActivity extends Activity {
     }
 
     public void onProlongedSittingClicked(View view){
-        BA = BluetoothAdapter.getDefaultAdapter();
-        Intent turnOn = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-        startActivityForResult(turnOn, 0);
-        pairedDevices = BA.getBondedDevices();
 
-        ArrayList<String> s = new ArrayList<String>();
-        for(BluetoothDevice bt : pairedDevices)
-            s.add(bt.getName());
-        Log.d("S", Arrays.toString(s.toArray()));
-        String deviceName = "HC-06";
+        if (BA.isEnabled()) {
+            pairedDevices = BA.getBondedDevices();
+
+            ArrayList<String> s = new ArrayList<String>();
+            for(BluetoothDevice bt : pairedDevices)
+                s.add(bt.getName());
+            Log.d("S", Arrays.toString(s.toArray()));
+            String deviceName = "HC-06";
+        }
+        else
+        {
+            BA = BluetoothAdapter.getDefaultAdapter();
+            startActivity(new Intent(Settings.ACTION_BLUETOOTH_SETTINGS));
+        }
+
         //connect(BA);
 
     }

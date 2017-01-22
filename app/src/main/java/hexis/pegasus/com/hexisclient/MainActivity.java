@@ -35,6 +35,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+import app.akexorcist.bluetotohspp.library.BluetoothSPP;
+import app.akexorcist.bluetotohspp.library.BluetoothState;
+
 import static android.content.ContentValues.TAG;
 
 public class MainActivity extends Activity {
@@ -174,6 +177,14 @@ public class MainActivity extends Activity {
 
         //connect(BA);
 
+    }
+
+    public void newBluetooth (){
+        BluetoothSPP bt = new BluetoothSPP(this);
+        if(!bt.isBluetoothAvailable()) {
+            // any command for bluetooth is not available
+        }
+        bt.startService(BluetoothState.DEVICE_OTHER);
     }
 
     public void connect(BluetoothAdapter BA){

@@ -26,6 +26,8 @@ import android.content.res.Configuration;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -224,6 +226,7 @@ public class MainActivity extends Activity {
             title = titles[position];
         }
         getActionBar().setTitle(title);
+
     }
 
     @Override

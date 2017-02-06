@@ -9,8 +9,10 @@ import com.android.volley.toolbox.Volley;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -72,6 +74,11 @@ public class HabitActivity extends Activity {
     }
 
     public void onSaveClick(View view) {
+        // Get instance of Vibrator from current Context
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
+// Vibrate for 400 milliseconds
+        v.vibrate(400);
         final Habit habit = new Habit();
         EditText habitName = (EditText) findViewById(R.id.habit_type_input);
         habit.setHabitName(habitName.getText().toString());

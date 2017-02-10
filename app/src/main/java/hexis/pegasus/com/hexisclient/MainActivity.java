@@ -39,6 +39,7 @@ import java.util.UUID;
 
 import app.akexorcist.bluetotohspp.library.BluetoothSPP;
 import app.akexorcist.bluetotohspp.library.BluetoothState;
+import app.akexorcist.bluetotohspp.library.DeviceList;
 
 import static android.content.ContentValues.TAG;
 
@@ -49,11 +50,11 @@ public class MainActivity extends Activity {
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
     private int currentPosition = 0;
-    private BluetoothAdapter BA;
+    private BluetoothAdapter bluetoothAdapter;
     private Set<BluetoothDevice> pairedDevices;
 
     public void connectToDevice(View view) {
-        BA = BluetoothAdapter.getDefaultAdapter();
+        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         startActivity(new Intent(Settings.ACTION_BLUETOOTH_SETTINGS));
     }
 
@@ -103,6 +104,14 @@ public class MainActivity extends Activity {
         }else{
             selectItem(0);
         }
+        connectWithDevice();
+    }
+
+
+    private void connectWithDevice() {
+        //Bluetooth methods go here
+        //String address = bluetoothAdapter.getAddress();
+        //Log.d(TAG, address);
     }
 
     //Called whenever we call invalidateOptionsMenu()
@@ -160,64 +169,6 @@ public class MainActivity extends Activity {
         outState.putInt("position", currentPosition);
     }
 
-    public void onProlongedSittingClicked(View view){
-
-//        if (BA.isEnabled()) {
-//            pairedDevices = BA.getBondedDevices();
-//
-//            ArrayList<String> s = new ArrayList<String>();
-//            for(BluetoothDevice bt : pairedDevices)
-//                s.add(bt.getName());
-//            Log.d("S", Arrays.toString(s.toArray()));
-//            String deviceName = "HC-06";
-//        }
-//        else
-//        {
-//            BA = BluetoothAdapter.getDefaultAdapter();
-//            startActivity(new Intent(Settings.ACTION_BLUETOOTH_SETTINGS));
-//        }
-
-        //connect(BA);
-
-    }
-
-    public void newBluetooth (){
-        BluetoothSPP bt = new BluetoothSPP(this);
-        if(!bt.isBluetoothAvailable()) {
-            // any command for bluetooth is not available
-        }
-        bt.startService(BluetoothState.DEVICE_OTHER);
-    }
-
-    public void connect(BluetoothAdapter BA){
-        String address = "98:D3:34:90:96:36";
-        BluetoothDevice device = BA.getRemoteDevice(address);
-        BluetoothSocket tmp = null;
-        BluetoothSocket mmSocket = null;
-
-        // Get a BluetoothSocket for a connection with the
-        // given BluetoothDevice
-        try {
-            TelephonyManager tManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-            String MY_UUID = tManager.getDeviceId();
-            Log.d("UUID", MY_UUID);
-            tmp = device.createRfcommSocketToServiceRecord(UUID.fromString(MY_UUID));
-            Method m = device.getClass().getMethod("createRfcommSocket", new Class[] {int.class});
-            tmp = (BluetoothSocket) m.invoke(device, 1);
-        } catch (IOException e) {
-            Log.e(TAG, "create() failed", e);
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
-        Toast.makeText(this, "Bluetooth has turned on "+ tmp.isConnected(), Toast.LENGTH_SHORT).show();
-
-        mmSocket = tmp;
-    }
-
     private void setActionBarTitle(int position){
         String title;
         if(position == 0){
@@ -229,27 +180,5 @@ public class MainActivity extends Activity {
 
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        if (drawerToggle.onOptionsItemSelected(item)){
-            return true;
-        }
 
-        //Code to handle the action Items
-        switch (item.getItemId()){
-            case R.id.action_create_habit:
-                //Code to run when the Create Habit item is clicked
-                Intent intentHabit = new Intent(this, HabitActivity.class);
-                startActivity(intentHabit);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
 }

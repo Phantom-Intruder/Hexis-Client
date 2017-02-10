@@ -24,10 +24,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".HabitActivity"
-            android:label="@string/add_habit"
-            android:parentActivityName=".MainActivity" />
         <!-- [START firebase_service] -->
         <service android:name=".MyFirebaseInstanceIDService">
             <intent-filter>

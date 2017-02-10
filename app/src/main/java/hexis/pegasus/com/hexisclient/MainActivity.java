@@ -28,6 +28,7 @@ import android.widget.VideoView;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -50,11 +51,13 @@ public class MainActivity extends Activity {
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
     private int currentPosition = 0;
-    private BluetoothAdapter bluetoothAdapter;
-    private Set<BluetoothDevice> pairedDevices;
+    private BluetoothAdapter BA = BluetoothAdapter.getDefaultAdapter();
+    private Set<BluetoothDevice>pairedDevices;
+    private DataOutputStream outputStream;
+    static BluetoothSocket mmSocket = null;
 
     public void connectToDevice(View view) {
-        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        //bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         startActivity(new Intent(Settings.ACTION_BLUETOOTH_SETTINGS));
     }
 
@@ -110,8 +113,57 @@ public class MainActivity extends Activity {
 
     private void connectWithDevice() {
         //Bluetooth methods go here
-        //String address = bluetoothAdapter.getAddress();
-        //Log.d(TAG, address);
+       //String address = "98:D3:34:90:96:36";
+        if (!BA.isEnabled()) {
+            BA = BluetoothAdapter.getDefaultAdapter();
+            BA = BluetoothAdapter.getDefaultAdapter();
+            startActivity(new Intent(Settings.ACTION_BLUETOOTH_SETTINGS));
+            pairedDevices = BA.getBondedDevices();
+            List<String> s = new ArrayList<String>();
+            int i = 0;
+            for(BluetoothDevice bt : pairedDevices) {
+                s.add(bt.getName());
+                i++;
+                Log.d(TAG, "BT devs"+s.get(i));
+            }
+
+        } else {
+            Log.d(TAG, "Here");
+            Toast.makeText(getApplicationContext(), "Already on", Toast.LENGTH_LONG).show();
+            String address = "98:D3:34:90:96:36";
+            BluetoothDevice device = BA.getRemoteDevice(address);
+            BluetoothSocket tmp = null;
+
+            UUID MY_UUID = DeviceUuidFactory.getDeviceUuid();
+            try {
+                tmp = device.createRfcommSocketToServiceRecord(MY_UUID);
+                Method m = device.getClass().getMethod("createRfcommSocket", new Class[] {int.class});
+                tmp = (BluetoothSocket) m.invoke(device, 1);
+            } catch (IOException e) {
+                Log.e(TAG, "create() failed", e);
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            }
+            mmSocket = tmp;
+            try {
+                mmSocket.connect();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Log.d(TAG, "Devices"+ mmSocket.getRemoteDevice()+ " --- " + mmSocket.isConnected());
+            char two = '1';
+            try {
+                outputStream = new DataOutputStream(mmSocket.getOutputStream());
+                outputStream.writeChar(two);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
     //Called whenever we call invalidateOptionsMenu()

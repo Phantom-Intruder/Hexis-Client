@@ -1,5 +1,6 @@
 package hexis.pegasus.com.hexisclient;
 
+import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.os.Vibrator;
 
@@ -9,9 +10,16 @@ import android.widget.Toast;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
+
 import static android.content.ContentValues.TAG;
+import static hexis.pegasus.com.hexisclient.MainActivity.mmSocket;
+
 
 public class HabitNotificationService extends FirebaseMessagingService {
+    private DataOutputStream outputStream;
+
     public HabitNotificationService() {
     }
 
@@ -28,5 +36,19 @@ public class HabitNotificationService extends FirebaseMessagingService {
 
         // Vibrate for 400 milliseconds
         v.vibrate(400);
+        BluetoothSocket socket = mmSocket;
+        try {
+            mmSocket.connect();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Log.d(TAG, "Devices"+ mmSocket.getRemoteDevice()+ " --- " + mmSocket.isConnected());
+        char two = '2';
+        try {
+            outputStream = new DataOutputStream(mmSocket.getOutputStream());
+            outputStream.writeChar(two);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -33,6 +33,10 @@ import static android.content.ContentValues.TAG;
 public class MainActivity extends Activity {
 
     public static boolean getRestrictedWebsiteHabitState = false;
+    public static boolean getProlongedConversationsState = false;
+    public static boolean getProlongedSittingState = false;
+    public static boolean getSmokingState = false;
+
     private String[] titles;
     private ListView drawerList;
     private DrawerLayout drawerLayout;
@@ -47,6 +51,35 @@ public class MainActivity extends Activity {
             Toast.makeText(getApplicationContext(), "Disabled. Disable extension to prevent alerts", Toast.LENGTH_LONG).show();
         }else{
             Toast.makeText(getApplicationContext(), "Enabled. Enable extension to get alerts", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void turnOnConversationRestriction(View view) {
+        getProlongedConversationsState = !getProlongedConversationsState;
+        if (!getProlongedConversationsState){
+            Toast.makeText(getApplicationContext(), "Disabled.", Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(getApplicationContext(), "Enabled.", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void turnOnProlongedSitting(View view) {
+        //TODO: Send the data to the device
+        getProlongedSittingState = !getProlongedSittingState;
+        if (!getProlongedSittingState){
+            Toast.makeText(getApplicationContext(), "Disabled.", Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(getApplicationContext(), "Enabled.", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void turnOnSmoking(View view) {
+        //TODO: Send the data to the device
+        getSmokingState = !getSmokingState;
+        if (!getSmokingState){
+            Toast.makeText(getApplicationContext(), "Disabled.", Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(getApplicationContext(), "Enabled.", Toast.LENGTH_LONG).show();
         }
     }
 

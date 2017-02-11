@@ -24,7 +24,7 @@
         android:layout_below="@+id/switcher_habit_3"
         android:layout_alignStart="@+id/switcher_habit_2"
         android:layout_marginTop="48dp"
-        android:onClick="onProlongedSittingClicked"/>
+        android:onClick="turnOnProlongedSitting"/>
 
     <Switch
         android:id="@id/switcher_habit_2"
@@ -34,7 +34,8 @@
         android:checked="false"
         android:layout_marginTop="44dp"
         android:layout_below="@+id/switcher_habit_1"
-        android:layout_alignStart="@+id/switcher_habit_1" />
+        android:layout_alignStart="@+id/switcher_habit_1"
+        android:onClick="turnOnConversationRestriction"/>
 
     <Switch
         android:id="@+id/switcher_habit_1"
@@ -45,7 +46,8 @@
         android:layout_marginStart="52dp"
         android:layout_marginTop="40dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:onClick="turnOnSmoking"/>
 
 
 </RelativeLayout>

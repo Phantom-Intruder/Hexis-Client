@@ -11,6 +11,8 @@ import static hexis.pegasus.com.hexisclient.MainActivity.bluetoothSocket;
 
 class HabitThreads {
     private Thread restrictedWebsiteThread;
+    private Thread prolongedConversationThread;
+
     private void restrictedWebsite(){
          restrictedWebsiteThread = new Thread(new Runnable(){
             @Override
@@ -20,7 +22,6 @@ class HabitThreads {
                 Log.d(TAG, "Devices"+ socket.getRemoteDevice()+ " --- " + socket.isConnected());
                 char dataToSend = '2';
                 try {
-                    Log.d(TAG, "Came here");
                     DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream());
                     outputStream.writeChar(dataToSend);
                 } catch (IOException e) {
@@ -30,9 +31,27 @@ class HabitThreads {
         });
     }
 
+    private void prolongedConversation(){
+        prolongedConversationThread = new Thread(new Runnable(){
+            @Override
+            public void run() {
+                BluetoothSocket socket = bluetoothSocket;
+
+                Log.d(TAG, "Devices"+ socket.getRemoteDevice()+ " --- " + socket.isConnected());
+                //TODO: Handle talking
+            }
+        });
+    }
+
     void visitedRestrictedWebsite(){
         restrictedWebsite();
         restrictedWebsiteThread.start();
+    }
+
+
+    void talkedForTooLong(){
+        prolongedConversation();
+        prolongedConversationThread.start();
     }
 
 }

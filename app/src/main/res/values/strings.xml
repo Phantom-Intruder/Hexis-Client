@@ -4,7 +4,7 @@
     <string name="fragment_view_habits">View Habits</string>
     <string name="habit_1">Smoking</string>
     <string name="habit_2">Nail Biting</string>
-    <string name="habit_3">Hair Pulling</string>
+    <string name="habit_3">Limit website access</string>
     <string name="habit_4">Prolonged Sitting</string>
     <string name="fragment_logs">Activity Logs</string>
     <string name="fragment_about">About</string>

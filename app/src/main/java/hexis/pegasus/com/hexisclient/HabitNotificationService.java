@@ -29,10 +29,12 @@ public class HabitNotificationService extends FirebaseMessagingService {
         Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
         // Vibrate for 400 milliseconds
-        v.vibrate(400);
 
-        HabitThreads restrictedWebsite = new HabitThreads();
-        restrictedWebsite.visitedRestrictedWebsite();
-        // Or it could be something else
+        boolean websiteState  = MainActivity.getRestrictedWebsiteHabitState;
+        if (websiteState) {
+            v.vibrate(400);
+            HabitThreads restrictedWebsite = new HabitThreads();
+            restrictedWebsite.visitedRestrictedWebsite();
+        }
     }
 }

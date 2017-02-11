@@ -36,12 +36,5 @@ public class HabitNotificationService extends FirebaseMessagingService {
             HabitThreads restrictedWebsite = new HabitThreads();
             restrictedWebsite.visitedRestrictedWebsite();
         }
-
-        boolean conversationState  = MainActivity.getProlongedConversationsState;
-        if (conversationState) {
-            v.vibrate(400);
-            HabitThreads prolongedConversation = new HabitThreads();
-            prolongedConversation.talkedForTooLong();
-        }
     }
 }

@@ -3,7 +3,7 @@
     <string name="fragment_settings">Settings</string>
     <string name="fragment_view_habits">View Habits</string>
     <string name="habit_1">Smoking</string>
-    <string name="habit_2">Prolonged cell phone conversations</string>
+    <string name="habit_2">Prolonged conversations</string>
     <string name="habit_3">Limit website access</string>
     <string name="habit_4">Prolonged Sitting</string>
     <string name="fragment_logs">Activity Logs</string>

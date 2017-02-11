@@ -39,6 +39,13 @@ class HabitThreads {
 
                 Log.d(TAG, "Devices"+ socket.getRemoteDevice()+ " --- " + socket.isConnected());
                 //TODO: Handle talking
+                char dataToSend = '2';
+                try {
+                    DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream());
+                    outputStream.writeChar(dataToSend);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

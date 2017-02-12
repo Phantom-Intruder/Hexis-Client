@@ -13,7 +13,7 @@ import static android.content.ContentValues.TAG;
 public class CallReceiver extends PhonecallReceiver {
 
     private boolean callEnded = true;
-    Timer timer = new Timer ();
+    Timer timer;
 
     void setCallEnded(boolean value){
         callEnded = value;
@@ -33,6 +33,7 @@ public class CallReceiver extends PhonecallReceiver {
     @Override
     protected void onIncomingCallAnswered(Context ctx, String number, Date start)
     {
+        timer = new Timer ();
         final int[] times = {0};
         setCallEnded(false);
         TimerTask hourlyTask = new TimerTask () {
@@ -69,7 +70,6 @@ public class CallReceiver extends PhonecallReceiver {
         Log.d(TAG, "Call stateC"+getCallEnded());
         timer.cancel();
         timer.purge();
-        timer = null;
         timer = new Timer();
         HabitThreads prolongedConversationOff = new HabitThreads();
         prolongedConversationOff.talkedForTooLongOff();

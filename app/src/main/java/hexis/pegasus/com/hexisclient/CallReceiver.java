@@ -13,6 +13,15 @@ import static android.content.ContentValues.TAG;
 public class CallReceiver extends PhonecallReceiver {
 
     private boolean callEnded = true;
+    Timer timer = new Timer ();
+
+    void setCallEnded(boolean value){
+        callEnded = value;
+    }
+
+    boolean getCallEnded(){
+        return callEnded;
+    }
 
     @Override
     protected void onIncomingCallReceived(Context ctx, String number, Date start)
@@ -24,17 +33,27 @@ public class CallReceiver extends PhonecallReceiver {
     @Override
     protected void onIncomingCallAnswered(Context ctx, String number, Date start)
     {
-        //
-        Timer timer = new Timer ();
+        final int[] times = {0};
+        setCallEnded(false);
         TimerTask hourlyTask = new TimerTask () {
             @Override
             public void run () {
-                if (callEnded == false){
-                boolean conversationState  = MainActivity.getProlongedConversationsState;
-                if (conversationState) {
-                    HabitThreads prolongedConversation = new HabitThreads();
-                    prolongedConversation.talkedForTooLong();
-                }}
+                if (times[0] == 0) {
+                    times[0]++;
+                } else {
+                    if (!getCallEnded()) {
+
+                        boolean conversationState = MainActivity.getProlongedConversationsState;
+
+                        if (conversationState) {
+                            Log.d(TAG, "Call stateC" + getCallEnded() + " --- ");
+                            HabitThreads prolongedConversation = new HabitThreads();
+                            prolongedConversation.talkedForTooLong();
+                        }
+                    } else {
+                        Log.d(TAG, "Prob");
+                    }
+                }
             }
         };
 
@@ -46,19 +65,55 @@ public class CallReceiver extends PhonecallReceiver {
     protected void onIncomingCallEnded(Context ctx, String number, Date start, Date end)
     {
         //
-        callEnded = true;
+        setCallEnded(true);
+        Log.d(TAG, "Call stateC"+getCallEnded());
+        timer.cancel();
+        timer.purge();
+        timer = null;
+        timer = new Timer();
+        HabitThreads prolongedConversationOff = new HabitThreads();
+        prolongedConversationOff.talkedForTooLongOff();
     }
 
     @Override
     protected void onOutgoingCallStarted(Context ctx, String number, Date start)
     {
-        //
+        final int[] times = {0};
+        setCallEnded(false);
+        TimerTask hourlyTask = new TimerTask () {
+            @Override
+            public void run () {
+                if (times[0] == 0) {
+                    times[0]++;
+                } else {
+                    if (!getCallEnded()) {
+
+                        boolean conversationState = MainActivity.getProlongedConversationsState;
+
+                        if (conversationState) {
+                            Log.d(TAG, "Call stateC" + getCallEnded() + " --- ");
+                            HabitThreads prolongedConversation = new HabitThreads();
+                            prolongedConversation.talkedForTooLong();
+                        }
+                    } else {
+                        Log.d(TAG, "Prob");
+                    }
+                }
+            }
+        };
     }
 
     @Override
     protected void onOutgoingCallEnded(Context ctx, String number, Date start, Date end)
     {
-        //
+        setCallEnded(true);
+        Log.d(TAG, "Call stateC"+getCallEnded());
+        timer.cancel();
+        timer.purge();
+        timer = null;
+        timer = new Timer();
+        HabitThreads prolongedConversationOff = new HabitThreads();
+        prolongedConversationOff.talkedForTooLongOff();
     }
 
     @Override

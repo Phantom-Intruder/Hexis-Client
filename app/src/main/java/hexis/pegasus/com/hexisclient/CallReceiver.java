@@ -15,6 +15,11 @@ public class CallReceiver extends PhonecallReceiver {
     private boolean callEnded = true;
     Timer timer;
 
+    // now the initialization is done only within the constructor
+    public CallReceiver (){
+        timer = new Timer ();
+    }
+
     void setCallEnded(boolean value){
         callEnded = value;
     }
@@ -33,7 +38,7 @@ public class CallReceiver extends PhonecallReceiver {
     @Override
     protected void onIncomingCallAnswered(Context ctx, String number, Date start)
     {
-        timer = new Timer ();
+       // timer = new Timer ();
         final int[] times = {0};
         setCallEnded(false);
         TimerTask hourlyTask = new TimerTask () {
@@ -70,7 +75,7 @@ public class CallReceiver extends PhonecallReceiver {
         Log.d(TAG, "Call stateC"+getCallEnded());
         timer.cancel();
         timer.purge();
-        timer = new Timer();
+       // timer = new Timer(); coomented this
         HabitThreads prolongedConversationOff = new HabitThreads();
         prolongedConversationOff.talkedForTooLongOff();
     }
@@ -111,7 +116,7 @@ public class CallReceiver extends PhonecallReceiver {
         timer.cancel();
         timer.purge();
         timer = null;
-        timer = new Timer();
+      //  timer = new Timer(); coomented this
         HabitThreads prolongedConversationOff = new HabitThreads();
         prolongedConversationOff.talkedForTooLongOff();
     }

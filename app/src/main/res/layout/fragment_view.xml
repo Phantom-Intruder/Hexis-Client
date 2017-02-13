@@ -5,26 +5,26 @@
     tools:context=".MainActivity">
 
     <Switch
-        android:id="@id/switcher_habit_3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/habit_3"
-        android:checked="false"
-        android:layout_marginTop="48dp"
-        android:layout_below="@+id/switcher_habit_2"
-        android:layout_alignStart="@+id/switcher_habit_1"
-        android:onClick="turnOnRestrictWebsiteAccess"/>
-
-    <Switch
         android:id="@id/switcher_habit_4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/habit_4"
         android:checked="false"
+        android:onClick="turnOnProlongedSitting"
+        android:layout_marginTop="68dp"
         android:layout_below="@+id/switcher_habit_3"
+        android:layout_alignStart="@+id/switcher_habit_3" />
+
+    <Switch
+        android:id="@id/switcher_habit_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/habit_3"
+        android:checked="false"
+        android:onClick="turnOnRestrictWebsiteAccess"
+        android:layout_below="@+id/switcher_habit_2"
         android:layout_alignStart="@+id/switcher_habit_2"
-        android:layout_marginTop="48dp"
-        android:onClick="turnOnProlongedSitting"/>
+        android:layout_marginTop="71dp" />
 
     <Switch
         android:id="@id/switcher_habit_2"
@@ -32,10 +32,10 @@
         android:layout_height="wrap_content"
         android:text="@string/habit_2"
         android:checked="false"
-        android:layout_marginTop="44dp"
+        android:onClick="turnOnConversationRestriction"
+        android:layout_marginTop="75dp"
         android:layout_below="@+id/switcher_habit_1"
-        android:layout_alignStart="@+id/switcher_habit_1"
-        android:onClick="turnOnConversationRestriction"/>
+        android:layout_alignStart="@+id/switcher_habit_1" />
 
     <Switch
         android:id="@+id/switcher_habit_1"
@@ -43,11 +43,11 @@
         android:layout_height="wrap_content"
         android:text="@string/habit_1"
         android:checked="false"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="57dp"
+        android:layout_marginTop="108dp"
+        android:onClick="turnOnSmoking"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:onClick="turnOnSmoking"/>
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>

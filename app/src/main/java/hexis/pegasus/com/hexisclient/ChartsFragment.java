@@ -11,19 +11,23 @@ import android.view.ViewGroup;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ActivityLogFragment extends Fragment {
+public class ChartsFragment extends Fragment {
 
 
-    public ActivityLogFragment() {
+    public ChartsFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_activity_log, container, false);
+        return inflater.inflate(R.layout.fragment_charts, container, false);
     }
 
 }

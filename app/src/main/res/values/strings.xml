@@ -8,9 +8,10 @@
     <string name="habit_4">Prolonged Sitting</string>
     <string name="fragment_logs">Activity Logs</string>
     <string name="fragment_about">About</string>
-<string name="cancel">Cancel</string>
+    <string name="cancel">Cancel</string>
     <string name="save">Save</string>
     <string name="language">Language</string>
+    <string name="charts">Statistics</string>
 
     <string-array name="language_options">
         <item>English</item>
@@ -21,10 +22,9 @@
     <string name="updates">Facebook status updates</string>
 
     <string name="notifications">Notifications</string>
-
+<string name="habit_details">Habit Details</string>
     <string-array name="menu_drawer">
         <item>@string/fragment_view_habits</item>
-        <item>@string/fragment_logs</item>
         <item>@string/fragment_settings</item>
         <item>@string/fragment_about</item>
     </string-array>
@@ -45,5 +45,8 @@
     <string name="habit_type">Habit Type</string>
 
     <string name="add_habit">Add Habit</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

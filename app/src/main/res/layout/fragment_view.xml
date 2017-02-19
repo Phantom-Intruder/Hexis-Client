@@ -4,49 +4,108 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Switch
-        android:id="@id/switcher_habit_4"
+
+    <TextView
+        android:text="@string/habit_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/textView5"
+        android:textAppearance="@android:style/TextAppearance"
+        android:layout_alignBaseline="@+id/switcher_habit_1"
+        android:layout_alignBottom="@+id/switcher_habit_1"
+        android:layout_alignStart="@+id/textView2" />
+
+    <TextView
         android:text="@string/habit_4"
-        android:checked="false"
-        android:onClick="turnOnProlongedSitting"
-        android:layout_marginTop="68dp"
-        android:layout_below="@+id/switcher_habit_3"
-        android:layout_alignStart="@+id/switcher_habit_3" />
-
-    <Switch
-        android:id="@id/switcher_habit_3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/habit_3"
-        android:checked="false"
-        android:onClick="turnOnRestrictWebsiteAccess"
-        android:layout_below="@+id/switcher_habit_2"
-        android:layout_alignStart="@+id/switcher_habit_2"
-        android:layout_marginTop="71dp" />
+        android:id="@+id/textView4"
+        android:textSize="18sp"
+        android:layout_alignBaseline="@+id/switcher_habit_4"
+        android:layout_alignBottom="@+id/switcher_habit_4"
+        android:layout_alignStart="@+id/textView" />
 
-    <Switch
-        android:id="@id/switcher_habit_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/habit_2"
-        android:checked="false"
-        android:onClick="turnOnConversationRestriction"
-        android:layout_marginTop="75dp"
-        android:layout_below="@+id/switcher_habit_1"
-        android:layout_alignStart="@+id/switcher_habit_1" />
-
-    <Switch
+    <ToggleButton
         android:id="@+id/switcher_habit_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/habit_1"
         android:checked="false"
-        android:layout_marginStart="57dp"
-        android:layout_marginTop="108dp"
+        android:layout_marginTop="141dp"
+        android:background="@drawable/toggle_selector"
+        android:textOff=""
+        android:textOn=""
         android:onClick="turnOnSmoking"
+        android:layout_marginEnd="30dp"
         android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="@string/habit_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:textAppearance="@android:style/TextAppearance"
+        android:layout_alignBaseline="@+id/switcher_habit_1"
+        android:layout_alignBottom="@+id/switcher_habit_1"
+        android:layout_alignStart="@+id/textView2" />
+
+    <TextView
+        android:text="@string/habit_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView3"
+        android:layout_above="@+id/switcher_habit_4"
+        android:layout_alignStart="@+id/textView4"
+        android:textAppearance="@android:style/TextAppearance" />
+
+    <ToggleButton
+        android:id="@id/switcher_habit_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:background="@drawable/toggle_selector"
+        android:onClick="turnOnConversationRestriction"
+        android:layout_marginTop="77dp"
+        android:textOff=""
+        android:textOn=""
+        android:layout_below="@+id/switcher_habit_1"
+        android:layout_alignStart="@+id/switcher_habit_1" />
+
+    <ToggleButton
+        android:id="@id/switcher_habit_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:background="@drawable/toggle_selector"
+        android:onClick="turnOnProlongedSitting"
+        android:layout_marginTop="74dp"
+        android:layout_below="@+id/switcher_habit_3"
+        android:textOff=""
+        android:textOn=""
+        android:layout_alignStart="@+id/switcher_habit_3" />
+
+    <ToggleButton
+        android:id="@id/switcher_habit_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:background="@drawable/toggle_selector"
+        android:textOff=""
+        android:textOn=""
+        android:onClick="turnOnRestrictWebsiteAccess"
+        android:layout_marginTop="62dp"
+        android:layout_below="@+id/switcher_habit_2"
+        android:layout_alignStart="@+id/switcher_habit_2" />
+
+    <TextView
+        android:text="@string/habit_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:id="@+id/textView2"
+        android:textAppearance="@android:style/TextAppearance"
+        android:layout_alignBaseline="@+id/switcher_habit_2"
+        android:layout_alignBottom="@+id/switcher_habit_2"
         android:layout_alignParentStart="true" />
 
 

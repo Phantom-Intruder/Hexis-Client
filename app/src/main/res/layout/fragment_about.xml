@@ -11,16 +11,16 @@
         android:text="Hexis Client 1.0.0"
         android:textColor="@android:color/black"
         android:textColorHighlight="@android:color/primary_text_dark"
-        android:layout_marginTop="124dp"
+        android:layout_marginTop="174dp"
         android:gravity="center_horizontal"
         android:textSize="30dp"/>
 
     <TextView
         android:id="@+id/text_about"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="407dp"
         android:gravity="center"
-        android:layout_marginTop="124dp"
+        android:layout_marginTop="194dp"
         android:layout_below="@+id/text_about_head"
         android:text="Android client for Hexis habit control device\n Developed by Team Pegasus\n E-mail: teampegasus60@gmail.com"/>
 

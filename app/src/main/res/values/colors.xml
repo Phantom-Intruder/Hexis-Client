@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-      <color name="colorPrimary">#d32f2f</color>
+      <color name="colorPrimary">#47a648</color>
         <color name="colorPrimaryDark">#c72c2c</color>
-        <color name="colorAccent">#FFFFFF</color>
+        <color name="colorAccent">#ffffff</color>
+    <color name="NavBarColour">#2c692d</color>
+    <color name="green">#2c692d</color>
+    <color name="white">#ffffff</color>
 </resources>

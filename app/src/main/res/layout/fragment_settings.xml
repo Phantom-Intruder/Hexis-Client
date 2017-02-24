@@ -4,17 +4,6 @@
     android:layout_height="match_parent"
     tools:context="hexis.pegasus.com.hexisclient.SettingsFragment">
 
-    <TextView
-        android:text="@string/language"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="51dp"
-        android:layout_marginTop="45dp"
-        android:id="@+id/language"
-        android:textAppearance="@android:style/TextAppearance"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
-
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,35 +13,6 @@
         android:layout_toEndOf="@+id/language"
         android:layout_marginStart="41dp"
         android:entries="@array/language_options" />
-
-    <ToggleButton
-        android:text="ToggleButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/facebook_toggle"
-        android:layout_alignBaseline="@+id/facebook_text"
-        android:layout_alignBottom="@+id/facebook_text"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="15dp" />
-
-    <TextView
-        android:text="@string/notifications"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/notification_text"
-        android:textAppearance="@android:style/TextAppearance"
-        android:layout_alignBaseline="@+id/notifications_toggle"
-        android:layout_alignBottom="@+id/notifications_toggle"
-        android:layout_alignStart="@+id/facebook_text" />
-
-    <ToggleButton
-        android:text="ToggleButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/notifications_toggle"
-        android:layout_below="@+id/facebook_toggle"
-        android:layout_alignStart="@+id/facebook_toggle"
-        android:layout_marginTop="71dp" />
 
     <Button
         android:text="@string/cancel"
@@ -74,13 +34,53 @@
         android:layout_alignStart="@+id/notification_text"
         android:layout_marginStart="12dp" />
 
+    <ToggleButton
+        android:text="ToggleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/notifications_toggle"
+        android:layout_above="@+id/button_cancel"
+        android:layout_alignStart="@+id/facebook_toggle"
+        android:layout_marginBottom="181dp" />
+
+    <TextView
+        android:text="@string/notifications"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/notification_text"
+        android:textAppearance="@android:style/TextAppearance"
+        android:layout_alignBottom="@+id/notifications_toggle"
+        android:layout_alignStart="@+id/facebook_text"
+        android:layout_marginBottom="9dp" />
+
+    <TextView
+        android:text="@string/language"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="47dp"
+        android:id="@+id/language"
+        android:textAppearance="@android:style/TextAppearance"
+        android:layout_marginBottom="80dp"
+        android:layout_above="@+id/facebook_toggle"
+        android:layout_alignParentStart="true" />
+
+    <ToggleButton
+        android:text="ToggleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/facebook_toggle"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="53dp"
+        android:layout_above="@+id/notifications_toggle"
+        android:layout_alignParentEnd="true" />
+
     <TextView
         android:text="@string/updates"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="81dp"
         android:id="@+id/facebook_text"
         android:textAppearance="@android:style/TextAppearance"
-        android:layout_below="@+id/language_spinner"
+        android:layout_marginBottom="9dp"
+        android:layout_alignBottom="@+id/facebook_toggle"
         android:layout_alignStart="@+id/language" />
 </RelativeLayout>

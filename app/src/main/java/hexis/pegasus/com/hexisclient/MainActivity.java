@@ -15,7 +15,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.content.Intent;
 import android.view.MenuItem;
-import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.view.View;
@@ -24,9 +23,12 @@ import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.UUID;
@@ -198,11 +200,12 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     while (true) {
-                        DataInputStream inputStream = null;
+                        DataInputStream inputStream;
                         try {
                             inputStream = new DataInputStream(bluetoothSocket.getInputStream());
                             char inData = inputStream.readChar();
-                            Log.d(TAG, "Data rec: "+String.valueOf(inData));
+
+                            Log.d(TAG, "Data rec: "+inData);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -210,6 +213,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
     }
+
 
     private void sendDataToDevice(char dataToSend) {
         try {
@@ -317,4 +321,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    void showErrorMessage(){
+        Toast.makeText(getApplicationContext(), "The app is not connected to the device.", Toast.LENGTH_LONG).show();
+
+    }
 }

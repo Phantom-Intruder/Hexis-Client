@@ -1,13 +1,24 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="hexis.pegasus.com.hexisclient.ChartsFragment">
 
-    <com.github.mikephil.charting.charts.BarChart
 
-        android:layout_height="400dp"
+    <ScrollView
         android:layout_width="match_parent"
-        android:id="@+id/bargraph"/>
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.jjoe64.graphview.GraphView
+                android:layout_width="match_parent"
+                android:layout_height="400dip"
+                android:id="@+id/graph" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

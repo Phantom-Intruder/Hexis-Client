@@ -8,22 +8,27 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
-import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.content.ContentValues.TAG;
 
 public class StatisticsActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    BarChart barChart;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +47,6 @@ public class StatisticsActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case android.R.id.home:
-                        System.out.println("??");
                         finish();
                         return true;
 
@@ -50,33 +54,6 @@ public class StatisticsActivity extends AppCompatActivity {
                 return true;
             }
         });
-//        barChart = (BarChart) findViewById(R.id.bargraph);
-//
-//        ArrayList<BarEntry> barEntries = new ArrayList<>();
-//        barEntries.add(new BarEntry(44f,0));
-//        barEntries.add(new BarEntry(88f,1));
-//        barEntries.add(new BarEntry(64f,2));
-//        barEntries.add(new BarEntry(22f,3));
-//        barEntries.add(new BarEntry(19f,4));
-//        barEntries.add(new BarEntry(91f,5));
-//        barEntries.add(new BarEntry(26f,6));
-//        BarDataSet barDataSet = new BarDataSet(barEntries, "Day");
-//
-//        ArrayList<String> theDates = new ArrayList<>();
-//        theDates.add("Monday");
-//        theDates.add("Tuesday");
-//        theDates.add("Wednesday");
-//        theDates.add("Thursday");
-//        theDates.add("Friday");
-//        theDates.add("Saturday");
-//        theDates.add("Sunday");
-//
-//        BarData theData = new BarData(theDates, barDataSet);
-//        barChart.setData(theData);
-//
-//        barChart.setTouchEnabled(true);
-//        barChart.setDragEnabled(true);
-//        barChart.setScaleEnabled(true);
     }
 
 
@@ -98,6 +75,28 @@ public class StatisticsActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+    public void pressed(View view) {
+        GraphView graph = (GraphView) findViewById(R.id.graph);
+        if (graph == null){
+            Log.d(TAG, "Null stuff");
+        }
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
+                new DataPoint(0, 1),
+                new DataPoint(1, 5),
+                new DataPoint(2, 3),
+                new DataPoint(3, 2),
+                new DataPoint(4, 6)
+        });
+        graph.addSeries(series);
+    }
+
+    public void syncPressed(View view) {
+        TextView dynamicTextView = new TextView(this);
+        dynamicTextView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
+        dynamicTextView.setText(" Hello World ");
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {

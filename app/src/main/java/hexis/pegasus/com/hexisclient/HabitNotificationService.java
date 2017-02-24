@@ -4,11 +4,13 @@ import android.content.Context;
 import android.os.Vibrator;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import static android.content.ContentValues.TAG;
+import static hexis.pegasus.com.hexisclient.MainActivity.bluetoothSocket;
 
 
 public class HabitNotificationService extends FirebaseMessagingService {

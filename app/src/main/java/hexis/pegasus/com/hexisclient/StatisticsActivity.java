@@ -93,11 +93,6 @@ public class StatisticsActivity extends AppCompatActivity {
         graph.addSeries(series);
     }
 
-    public void syncPressed(View view) {
-        TextView dynamicTextView = new TextView(this);
-        dynamicTextView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
-        dynamicTextView.setText(" Hello World ");
-    }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();

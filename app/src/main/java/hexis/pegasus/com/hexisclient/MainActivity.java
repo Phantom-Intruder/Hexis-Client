@@ -137,7 +137,6 @@ public class MainActivity extends AppCompatActivity {
         //Display the correct fragment
         if (savedInstanceState != null) {
             currentPosition = savedInstanceState.getInt("position");
-            setActionBarTitle(currentPosition);
         } else {
             selectItem(0);
         }
@@ -266,13 +265,13 @@ public class MainActivity extends AppCompatActivity {
         currentPosition = position;
         Fragment fragment;
         switch (position) {
-            case 0:
+            case 1:
                 fragment = new ViewFragment();
                 break;
-            case 1:
+            case 2:
                 fragment = new SettingsFragment();
                 break;
-            case 2:
+            case 3:
                 fragment = new AboutFragment();
                 break;
             default:
@@ -283,8 +282,6 @@ public class MainActivity extends AppCompatActivity {
         ft.addToBackStack(null);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.commit();
-        //Set the action bar title
-        setActionBarTitle(position);
         //Close the drawer
         drawerLayout.closeDrawer(drawerList);
     }
@@ -295,14 +292,7 @@ public class MainActivity extends AppCompatActivity {
         outState.putInt("position", currentPosition);
     }
 
-    private void setActionBarTitle(int position) {
-        String title;
-        if (position == 0) {
-            title = getResources().getString(R.string.app_name);
-        } else {
-            title = titles[position];
-        }
-    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

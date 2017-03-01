@@ -11,15 +11,22 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 import static android.content.ContentValues.TAG;
 
@@ -28,7 +35,11 @@ public class StatisticsActivity extends AppCompatActivity {
     private Toolbar mToolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-
+    private ListView mainListView ;
+    private ArrayAdapter<String> listAdapter ;
+    private OkHttpClient client;
+    private Request request;
+    private String[] logData = new String[]{"ATA"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +65,47 @@ public class StatisticsActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    public void getDataFromServerAndPresent(View view) {
+        String url = "http://www.cybertechparadise.com/get_log.php?habitId=1%20OR%202%20OR%203%20%20OR%204";
+        client = new OkHttpClient();
+
+        request = new Request.Builder()
+                .url(url)
+                .build();
+
+            Thread thread = new Thread(new Runnable(){
+                @Override
+                public void run() {
+                    Call call = client.newCall(request);
+                    Response response = null;
+                    try {
+                        response = call.execute();
+                        logData = response.body().string().split(",");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+        });
+
+        thread.start();
+        // Find the ListView resource.
+        while (thread.isAlive()) {
+
+        }
+        mainListView = (ListView) findViewById( R.id.mainListView );
+
+        // Create and populate a List of planet names.
+        ArrayList<String> logsList = new ArrayList<String>();
+        logsList.addAll( Arrays.asList(logData) );
+
+        // Create ArrayAdapter using the planet list.
+        listAdapter = new ArrayAdapter<String>(this, R.layout.simplerow, logsList);
+
+
+        // Set the ArrayAdapter as the ListView's adapter.
+        mainListView.setAdapter( listAdapter );
     }
 
 

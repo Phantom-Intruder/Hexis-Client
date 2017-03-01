@@ -22,7 +22,7 @@
     <string name="updates">Facebook status updates</string>
 
     <string name="notifications">Notifications</string>
-<string name="habit_details">Habit Details</string>
+    <string name="habit_details">Habit Details</string>
     <string-array name="menu_drawer">
         <item>@string/fragment_view_habits</item>
         <item>@string/fragment_settings</item>
@@ -48,5 +48,6 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sync_with_server">Sync with server</string>
 
 </resources>

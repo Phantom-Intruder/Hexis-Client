@@ -16,6 +16,7 @@ public class ActivityLogFragment extends Fragment {
 
     public ActivityLogFragment() {
         // Required empty public constructor
+
     }
 
 

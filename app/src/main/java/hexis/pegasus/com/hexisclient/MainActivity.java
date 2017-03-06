@@ -50,6 +50,10 @@ public class MainActivity extends AppCompatActivity {
     private BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     static BluetoothSocket bluetoothSocket = null;
 
+    Fragment viewFragment;
+    Fragment settingsFragment;
+    Fragment aboutFragment;
+
     public void turnOnRestrictWebsiteAccess(View view) {
         getRestrictedWebsiteHabitState = !getRestrictedWebsiteHabitState;
         if (!getRestrictedWebsiteHabitState){
@@ -263,19 +267,39 @@ public class MainActivity extends AppCompatActivity {
 
     private void selectItem(int position) {
         currentPosition = position;
-        Fragment fragment;
+        Fragment fragment = null;
         switch (position) {
             case 1:
-                fragment = new ViewFragment();
+                if (viewFragment == null) {
+                    viewFragment = new ViewFragment();
+                    fragment = viewFragment;
+                }else{
+                    fragment = viewFragment;
+                }
                 break;
             case 2:
-                fragment = new SettingsFragment();
+                if (settingsFragment == null) {
+                    settingsFragment = new SettingsFragment();
+                    fragment = settingsFragment;
+                }else {
+                    fragment = settingsFragment;
+                }
                 break;
             case 3:
-                fragment = new AboutFragment();
+                if (aboutFragment == null){
+                    aboutFragment = new AboutFragment();
+                    fragment = aboutFragment;
+                }else {
+                    fragment = aboutFragment;
+                }
                 break;
             default:
-                fragment = new ViewFragment();
+                if (viewFragment == null) {
+                    viewFragment = new ViewFragment();
+                    fragment = viewFragment;
+                }else{
+                    fragment = viewFragment;
+                 }
         }
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.replace(R.id.content_frame, fragment);

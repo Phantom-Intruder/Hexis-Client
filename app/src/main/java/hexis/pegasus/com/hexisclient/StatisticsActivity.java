@@ -39,7 +39,7 @@ public class StatisticsActivity extends AppCompatActivity {
     private ArrayAdapter<String> listAdapter ;
     private OkHttpClient client;
     private Request request;
-    private String[] logData = new String[]{"ATA"};
+    private String[] logData = new String[]{"Please turn on internet connection"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

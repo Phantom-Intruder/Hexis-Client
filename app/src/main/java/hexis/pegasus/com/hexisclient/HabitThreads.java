@@ -34,17 +34,7 @@ class HabitThreads {
                     try {
                         DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream());
                         outputStream.writeChar(dataToSend);
-                        Calendar calendar = Calendar.getInstance();
-                        int day = calendar.get(Calendar.DAY_OF_MONTH);
-                        int month = calendar.get(Calendar.MONTH);
-                        int year = calendar.get(Calendar.YEAR);
-                        int hour = calendar.get(Calendar.HOUR_OF_DAY);
-                        int minute = calendar.get(Calendar.MINUTE);
-                        String hourStr = "0"+hour;
-                        String substringHour= hourStr.substring(Math.max(hourStr.length() - 2, 0));
-                        String minuteStr = "0"+minute;
-                        String substringMinute = minuteStr.substring(Math.max(minuteStr.length() - 2, 0));
-                        String data = "http://cybertechparadise.com/add_activity_log.php?data="+ day + "/" + month + "/" + year + " " + substringHour + ":" + substringMinute;
+                        String data = "http://cybertechparadise.com/report_activity.php?habitId=3";
                         Log.d(TAG, "cuber  " +data);
                         OkHttpClient client = new OkHttpClient();
 
@@ -79,6 +69,15 @@ class HabitThreads {
                 try {
                     DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream());
                     outputStream.writeChar(dataToSend);
+                    String data = "http://cybertechparadise.com/report_activity.php?habitId=2";
+                    Log.d(TAG, "cuber  " +data);
+                    OkHttpClient client = new OkHttpClient();
+
+                    Request request = new Request.Builder()
+                            .url(data)
+                            .build();
+
+                    client.newCall(request).execute();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

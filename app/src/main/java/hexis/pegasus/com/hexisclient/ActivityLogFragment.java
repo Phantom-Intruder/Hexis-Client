@@ -27,4 +27,6 @@ public class ActivityLogFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_activity_log, container, false);
     }
 
+
+
 }

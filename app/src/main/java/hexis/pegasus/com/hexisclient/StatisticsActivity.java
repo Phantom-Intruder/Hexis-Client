@@ -40,6 +40,7 @@ public class StatisticsActivity extends AppCompatActivity {
     private OkHttpClient client;
     private Request request;
     private String[] logData = new String[]{"Please turn on internet connection"};
+    private int[] graphData = new int[]{0};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +61,6 @@ public class StatisticsActivity extends AppCompatActivity {
                     case android.R.id.home:
                         finish();
                         return true;
-
                 }
                 return true;
             }
@@ -101,8 +101,13 @@ public class StatisticsActivity extends AppCompatActivity {
         logsList.addAll( Arrays.asList(logData) );
 
         // Create ArrayAdapter using the planet list.
+        graphData = new int[logData.length];
         listAdapter = new ArrayAdapter<String>(this, R.layout.simplerow, logsList);
-
+        for (int i=0; i <= logData.length-1; i++ ){
+            int data = Character.getNumericValue(logData[i].charAt(6));
+            graphData[i] = data;
+            Log.d(TAG, "dsfsdf "+ i + " sfsdf " + logData.length + " adsd " + graphData[i] + " dfs" + data);
+        }
 
         // Set the ArrayAdapter as the ListView's adapter.
         mainListView.setAdapter( listAdapter );
@@ -135,12 +140,28 @@ public class StatisticsActivity extends AppCompatActivity {
         if (graph == null){
             Log.d(TAG, "Null stuff");
         }
+
+        for (int i=0; i < graphData.length; i++ ){
+            graphData[i] = Character.getNumericValue(logData[i].charAt(6));
+        }
+
+        int first =0;
+        int second =0;
+        int third =0;
+        for (int aGraphData : graphData) {
+            if (aGraphData == 1) {
+                first++;
+            } else if (aGraphData == 2) {
+                second++;
+            } else {
+                third++;
+            }
+        }
+        Log.d(TAG, "qweasd"+ first + "---" + second+ "---" +third);
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
-                new DataPoint(0, 1),
-                new DataPoint(1, 5),
-                new DataPoint(2, 3),
-                new DataPoint(3, 2),
-                new DataPoint(4, 6)
+                new DataPoint(1, first),
+                new DataPoint(2, second),
+                new DataPoint(3, third)
         });
         graph.addSeries(series);
     }

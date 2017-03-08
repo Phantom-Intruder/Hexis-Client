@@ -1,5 +1,12 @@
 package hexis.pegasus.com.hexisclient;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.microsoft.windowsazure.notifications.NotificationsManager;
+import android.content.Intent;
+import android.net.Uri;
+import android.util.Log;
+import android.widget.Toast;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.bluetooth.BluetoothAdapter;
@@ -11,9 +18,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
-import android.content.Intent;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -21,19 +26,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
-
-import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.UUID;
-
-import static android.content.ContentValues.TAG;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
     private int currentPosition = 0;
     private BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     static BluetoothSocket bluetoothSocket = null;
+    public static MainActivity mainActivity;
+    public static Boolean isVisible = false;
+    private static final String TAG = "MainActivity";
+    private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
 
     Fragment viewFragment;
     Fragment settingsFragment;
@@ -60,6 +62,37 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Disabled. Disable extension to prevent alerts", Toast.LENGTH_LONG).show();
         }else{
             Toast.makeText(getApplicationContext(), "Enabled. Enable extension to get alerts", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    /**
+     * Check the device to make sure it has the Google Play Services APK. If
+     * it doesn't, display a dialog that allows users to download the APK from
+     * the Google Play Store or enable it in the device's system settings.
+     */
+    private boolean checkPlayServices() {
+        GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
+        int resultCode = apiAvailability.isGooglePlayServicesAvailable(this);
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (apiAvailability.isUserResolvableError(resultCode)) {
+                apiAvailability.getErrorDialog(this, resultCode, PLAY_SERVICES_RESOLUTION_REQUEST)
+                        .show();
+            } else {
+                Log.i(TAG, "This device is not supported by Google Play Services.");
+                ToastNotify("This device is not supported by Google Play Services.");
+                finish();
+            }
+            return false;
+        }
+        return true;
+    }
+
+    public void registerWithNotificationHubs()
+    {
+        if (checkPlayServices()) {
+            // Start IntentService to register this application with FCM.
+            Intent intent = new Intent(this, RegistrationIntentService.class);
+            startService(intent);
         }
     }
 
@@ -113,6 +146,9 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         View header = getLayoutInflater().inflate(R.layout.header, null);
         drawerList.addHeaderView(header);
+        mainActivity = this;
+        NotificationsManager.handleNotifications(this, NotificationSettings.SenderId, MyHandler.class);
+        registerWithNotificationHubs();
         //Populate the ListView
         drawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_activated_1, titles));
         drawerList.setOnItemClickListener(new DrawerItemClickListener());
@@ -147,6 +183,39 @@ public class MainActivity extends AppCompatActivity {
         connectWithDevice();
     }
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        isVisible = true;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        isVisible = false;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        isVisible = true;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        isVisible = false;
+    }
+
+    public void ToastNotify(final String notificationMessage) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(MainActivity.this, notificationMessage, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
 
     private void connectWithDevice() {
 
@@ -213,6 +282,8 @@ public class MainActivity extends AppCompatActivity {
                             Log.d(TAG, "Data rec: "+inData);
                         } catch (IOException e) {
                             e.printStackTrace();
+                        } catch (NullPointerException n){
+                            Toast.makeText(getApplicationContext(), "There was a problem connecting to the device", Toast.LENGTH_LONG).show();
                         }
                     }
                 }
@@ -316,7 +387,14 @@ public class MainActivity extends AppCompatActivity {
         outState.putInt("position", currentPosition);
     }
 
-
+    public void openWebsite(View view){
+        try {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("hexis-band.azurewebsites.net"));
+            startActivity(browserIntent);
+        }catch (Exception e){
+            Toast.makeText(getApplicationContext(), "There was a problem opening the default browser.", Toast.LENGTH_LONG).show();
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -331,7 +409,6 @@ public class MainActivity extends AppCompatActivity {
         if (drawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-
         if (id == R.id.action_view_charts) {
             Intent intent = new Intent(this, StatisticsActivity.class);
             startActivity(intent);
@@ -340,9 +417,4 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
-    void showErrorMessage(){
-        Toast.makeText(getApplicationContext(), "The app is not connected to the device.", Toast.LENGTH_LONG).show();
-
-    }
 }

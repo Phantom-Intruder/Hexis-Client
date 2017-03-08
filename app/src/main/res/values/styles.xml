@@ -22,6 +22,21 @@
             <item name="colorAccent">@color/colorAccent</item>
         </style>
 
+    <style name="StatisticsActivityTheme" parent="StatisticsActivityTheme.Base">
+         
+            
+        <item name="colorAccent">@android:color/holo_green_light</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+    </style>
+
+    <style name="StatisticsActivityTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
+                <item name="windowNoTitle">true</item>
+                <item name="windowActionBar">false</item>
+                <item name="colorPrimary">@color/colorPrimary</item>
+                <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+                <item name="colorAccent">@color/colorAccent</item>
+            </style>
+
     <style name="splashScreenTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="android:windowBackground">@drawable/splash</item>
     </style>

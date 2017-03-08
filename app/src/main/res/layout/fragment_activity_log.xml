@@ -4,9 +4,6 @@
     android:layout_height="match_parent"
     tools:context="hexis.pegasus.com.hexisclient.ActivityLogFragment">
 
-
-
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -26,4 +23,5 @@
     </ListView>
 
         </RelativeLayout>
+
 </RelativeLayout>

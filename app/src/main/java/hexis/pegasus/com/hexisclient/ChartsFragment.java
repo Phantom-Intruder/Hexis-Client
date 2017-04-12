@@ -38,4 +38,5 @@ public class ChartsFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_charts, container, false);
     }
 
+
 }

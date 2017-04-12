@@ -1,0 +1,103 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <TextView
+        android:text="@string/habit_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView5"
+        android:textAppearance="@android:style/TextAppearance"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/textView2"
+        android:layout_marginTop="54dp" />
+
+    <TextView
+        android:text="@string/habit_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView4"
+        android:textAppearance="@android:style/TextAppearance"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/textView3"
+        android:layout_marginBottom="30dp" />
+
+    <ToggleButton
+        android:id="@+id/switcher_habit_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:background="@drawable/toggle_selector"
+        android:textOff=""
+        android:textOn=""
+        android:onClick="turnOnSmoking"
+        android:layout_marginEnd="34dp"
+        android:layout_alignBaseline="@+id/textView5"
+        android:layout_alignBottom="@+id/textView5"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="@string/habit_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView3"
+        android:textAppearance="@android:style/TextAppearance"
+        android:layout_alignBaseline="@+id/switcher_habit_3"
+        android:layout_alignBottom="@+id/switcher_habit_3"
+        android:layout_alignStart="@+id/textView2" />
+
+    <ToggleButton
+        android:id="@id/switcher_habit_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:background="@drawable/toggle_selector"
+        android:onClick="turnOnConversationRestriction"
+        android:textOff=""
+        android:textOn=""
+        android:layout_alignBaseline="@+id/textView2"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignStart="@+id/switcher_habit_1" />
+
+    <ToggleButton
+        android:id="@id/switcher_habit_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:background="@drawable/toggle_selector"
+        android:onClick="turnOnProlongedSitting"
+        android:textOff=""
+        android:textOn=""
+        android:layout_alignBaseline="@+id/textView4"
+        android:layout_alignBottom="@+id/textView4"
+        android:layout_alignStart="@+id/switcher_habit_2" />
+
+    <ToggleButton
+        android:id="@id/switcher_habit_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:background="@drawable/toggle_selector"
+        android:textOff=""
+        android:textOn=""
+        android:onClick="turnOnRestrictWebsiteAccess"
+        android:layout_below="@+id/switcher_habit_2"
+        android:layout_alignStart="@+id/switcher_habit_2"
+        android:layout_marginTop="40dp" />
+
+    <TextView
+        android:text="@string/habit_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:id="@+id/textView2"
+        android:textAppearance="@android:style/TextAppearance"
+        android:layout_marginTop="65dp"
+        android:layout_below="@+id/switcher_habit_1"
+        android:layout_alignParentStart="true" />
+
+
+</RelativeLayout>

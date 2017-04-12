@@ -1,31 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
     package="hexis.pegasus.com.hexisclient">
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
      
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
-     
+     <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
-
+    <meta-data android:name="com.google.android.gms.version"
+        android:value="@integer/google_play_services_version" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        tools:replace="android:icon"
         android:theme="@style/MyMaterialTheme">
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name">
+            android:name=".SplashScreen"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/splashScreenTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name">
         </activity>
         <!-- [START firebase_service] -->
         <service android:name=".MyFirebaseInstanceIDService">
@@ -33,6 +44,18 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+        <service
+            android:name=".RegistrationIntentService"
+            android:exported="false">
+        </service>
+        <receiver android:name="com.microsoft.windowsazure.notifications.NotificationsBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="hexis.pegasus.com.hexisclient" />
+            </intent-filter>
+        </receiver>
+
         <service android:name=".HabitNotificationService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -48,9 +71,11 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".StatisticsActivity"
+        <activity
+            android:name=".StatisticsActivity"
             android:label="@string/habit_details"
-            android:parentActivityName=".MainActivity"/>
+            android:theme="@style/StatisticsActivityTheme"
+            android:parentActivityName=".MainActivity" />
     </application>
 
 </manifest>

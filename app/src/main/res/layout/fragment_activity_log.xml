@@ -4,13 +4,24 @@
     android:layout_height="match_parent"
     tools:context="hexis.pegasus.com.hexisclient.ActivityLogFragment">
 
-    <Button
-        android:text="Button"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="158dp"
-        android:id="@+id/button3"
-        android:onClick="syncPressed"/>
+        android:text="@string/sync_with_server"
+        android:id="@+id/button_sync"
+        android:onClick="getDataFromServerAndPresent"/>
+
+    <ListView android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/mainListView"
+        android:layout_below="@id/button_sync">
+    </ListView>
+
+        </RelativeLayout>
+
 </RelativeLayout>

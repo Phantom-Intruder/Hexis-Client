@@ -16,6 +16,7 @@ public class ActivityLogFragment extends Fragment {
 
     public ActivityLogFragment() {
         // Required empty public constructor
+
     }
 
 
@@ -25,5 +26,7 @@ public class ActivityLogFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_activity_log, container, false);
     }
+
+
 
 }

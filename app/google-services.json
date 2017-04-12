@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "51791375712",
+    "firebase_url": "https://hexis-android.firebaseio.com",
+    "project_id": "hexis-android",
+    "storage_bucket": "hexis-android.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:51791375712:android:bab1deffdd9620e1",
+        "android_client_info": {
+          "package_name": "hexis.pegasus.com.hexisclient"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "51791375712-g7tnr7a25utk3f94eapguukbute3a1cc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCt6DpXGRPVvlHTYpMoc2nJna1NNp7K0BQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "51791375712-g7tnr7a25utk3f94eapguukbute3a1cc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

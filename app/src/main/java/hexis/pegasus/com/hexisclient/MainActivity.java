@@ -107,6 +107,8 @@ public class MainActivity extends AppCompatActivity {
         titles = getResources().getStringArray(R.array.menu_drawer);
         drawerList = (ListView) findViewById(R.id.drawer);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        View header = getLayoutInflater().inflate(R.layout.header, null);
+        drawerList.addHeaderView(header);
         //Populate the ListView
         drawerList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_activated_1, titles));
         drawerList.setOnItemClickListener(new DrawerItemClickListener());
@@ -312,6 +314,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        if (drawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+
         if (id == R.id.action_view_charts) {
             Intent intent = new Intent(this, StatisticsActivity.class);
             startActivity(intent);

@@ -68,7 +68,7 @@ public class StatisticsActivity extends AppCompatActivity {
     }
 
     public void getDataFromServerAndPresent(View view) {
-        String url = "http://www.cybertechparadise.com/get_log.php?habitId=1%20OR%202%20OR%203%20%20OR%204";
+        String url = "http://www.hexis-band.azurewebsites.net/report_activty.php?habitId=3";
         client = new OkHttpClient();
 
         request = new Request.Builder()

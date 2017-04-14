@@ -125,6 +125,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void startFacbookService(View view) {
+        FacebookConnectClass.connect();
+    }
+
+    public void saveData(View view) {
+        //methana
+    }
+
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override

@@ -33,6 +33,11 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.UUID;
 
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+
+import static android.content.ContentValues.TAG;
+
 public class MainActivity extends AppCompatActivity {
 
     public static boolean getRestrictedWebsiteHabitState = false;
@@ -278,7 +283,36 @@ public class MainActivity extends AppCompatActivity {
                         try {
                             inputStream = new DataInputStream(bluetoothSocket.getInputStream());
                             char inData = inputStream.readChar();
+                            Thread prolongedSittingThread = new Thread(new Runnable(){
+                                @Override
+                                public void run() {
+                                    try {
+                                        BluetoothSocket socket = bluetoothSocket;
 
+                                        Log.d(TAG, "Devices"+ socket.getRemoteDevice()+ " --- " + socket.isConnected());
+                                        //TODO: Handle sitting
+                                        char dataToSend = '1';
+                                        try {
+                                            DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream());
+                                            outputStream.writeChar(dataToSend);
+                                            String data = "http://hexis-band.azurewebsites.net/report_activity.php?habitId=4";
+                                            Log.d(TAG, "cuber  " +data);
+                                            OkHttpClient client = new OkHttpClient();
+
+                                            Request request = new Request.Builder()
+                                                    .url(data)
+                                                    .build();
+
+                                            client.newCall(request).execute();
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }catch (Exception e){
+                                        //Do nothing
+                                    }
+                                }
+                            });
+                            prolongedSittingThread.start();
                             Log.d(TAG, "Data rec: "+inData);
                         } catch (IOException e) {
                             e.printStackTrace();

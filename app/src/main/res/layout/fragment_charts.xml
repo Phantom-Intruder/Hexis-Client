@@ -5,6 +5,15 @@
     tools:context="hexis.pegasus.com.hexisclient.ChartsFragment">
 
 
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="@mipmap/ic_refresh"
+        android:onClick="pressed" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,14 +32,5 @@
 
         </RelativeLayout>
     </ScrollView>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="pressed"
-        android:text="@string/sync_with_server"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="40dp"/>
 
 </RelativeLayout>

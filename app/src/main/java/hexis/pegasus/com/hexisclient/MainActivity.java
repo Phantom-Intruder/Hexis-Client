@@ -3,7 +3,11 @@ package hexis.pegasus.com.hexisclient;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.microsoft.windowsazure.notifications.NotificationsManager;
+
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
@@ -130,6 +134,26 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public static boolean openApp(Context context, String packageName) {
+        PackageManager manager = context.getPackageManager();
+        try {
+            Intent i = manager.getLaunchIntentForPackage(packageName);
+            if (i == null) {
+                return false;
+                //throw new PackageManager.NameNotFoundException();
+            }
+            i.addCategory(Intent.CATEGORY_LAUNCHER);
+            context.startActivity(i);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public void openFacebookApp(View view) {
+        openApp(this, "com.example.dmax.login");
+    }
+
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
@@ -138,6 +162,7 @@ public class MainActivity extends AppCompatActivity {
             selectItem(position);
         }
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

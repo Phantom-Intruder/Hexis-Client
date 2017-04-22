@@ -29,13 +29,11 @@ class HabitThreads {
                 try {
                     BluetoothSocket socket = bluetoothSocket;
 
-                    Log.d(TAG, "Devices" + socket.getRemoteDevice() + " --- " + socket.isConnected());
                     char dataToSend = '1';
                     try {
                         DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream());
                         outputStream.writeChar(dataToSend);
-                        String data = "http://cybertechparadise.com/report_activity.php?habitId=3";
-                        Log.d(TAG, "cuber  " +data);
+                        String data = "http://hexis-band.azurewebsites.net/report_activity.php?habitId=3";
                         OkHttpClient client = new OkHttpClient();
 
                         Request request = new Request.Builder()
@@ -69,7 +67,7 @@ class HabitThreads {
                 try {
                     DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream());
                     outputStream.writeChar(dataToSend);
-                    String data = "http://cybertechparadise.com/report_activity.php?habitId=2";
+                    String data = "http://hexis-band.azurewebsites.net/report_activity.php?habitId=2";
                     Log.d(TAG, "cuber  " +data);
                     OkHttpClient client = new OkHttpClient();
 
@@ -95,7 +93,6 @@ class HabitThreads {
                 try{
                 BluetoothSocket socket = bluetoothSocket;
 
-                Log.d(TAG, "Devices"+ socket.getRemoteDevice()+ " --- " + socket.isConnected());
                 //TODO: Handle talking
                 char dataToSend = '2';
                 try {

@@ -127,7 +127,6 @@ public class StatisticsActivity extends AppCompatActivity {
             case android.R.id.home:
                 finish();
                 break;
-
             default:
                 break;
         }

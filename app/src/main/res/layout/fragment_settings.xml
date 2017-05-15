@@ -73,7 +73,6 @@
         android:id="@+id/facebook_toggle"
         android:layout_marginEnd="14dp"
         android:layout_marginBottom="53dp"
-        android:onClick="startFacbookService"
         android:layout_above="@+id/notifications_toggle"
         android:layout_alignParentEnd="true"
         android:checked="false" />

@@ -21,6 +21,7 @@ class HabitThreads {
     private Thread restrictedWebsiteThread;
     private Thread prolongedConversationThread;
     private Thread prolongedConversationOffThread;
+    private Thread prolongedSittingThread;
 
     private void restrictedWebsite(){
          restrictedWebsiteThread = new Thread(new Runnable(){
@@ -34,6 +35,8 @@ class HabitThreads {
                         DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream());
                         outputStream.writeChar(dataToSend);
                         String data = "http://hexis-band.azurewebsites.net/report_activity.php?habitId=3";
+                        Log.d(TAG, "asdfcasfdfsdvfsdvaewr: website  ");
+
                         OkHttpClient client = new OkHttpClient();
 
                         Request request = new Request.Builder()
@@ -108,6 +111,28 @@ class HabitThreads {
         });
     }
 
+    private void MonitoringSitting(){
+        prolongedSittingThread = new Thread(new Runnable(){
+            @Override
+            public void run() {
+                try{
+                    BluetoothSocket socket = bluetoothSocket;
+
+                    //TODO: Handle talking
+                    char dataToSend = '3';
+                    try {
+                        DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream());
+                        outputStream.writeChar(dataToSend);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }catch (Exception e){
+                    //Do nothing
+                }
+            }
+        });
+    }
+
     void visitedRestrictedWebsite(){
         restrictedWebsite();
         restrictedWebsiteThread.start();
@@ -122,5 +147,10 @@ class HabitThreads {
     void talkedForTooLongOff(){
         prolongedConversationOff();
         prolongedConversationOffThread.start();
+    }
+
+    void IsMonitoringSitting(){
+        MonitoringSitting();
+        prolongedSittingThread.start();
     }
 }

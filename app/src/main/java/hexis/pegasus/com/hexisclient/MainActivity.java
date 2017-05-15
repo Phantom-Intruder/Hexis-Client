@@ -118,8 +118,12 @@ public class MainActivity extends AppCompatActivity {
         //TODO: Send the data to the device
         getProlongedSittingState = !getProlongedSittingState;
         if (!getProlongedSittingState){
+            HabitThreads prolongedSittingThread = new HabitThreads();
+            prolongedSittingThread.IsMonitoringSitting();
             Toast.makeText(getApplicationContext(), "Disabled.", Toast.LENGTH_LONG).show();
         }else{
+            HabitThreads prolongedSittingThread = new HabitThreads();
+            prolongedSittingThread.IsMonitoringSitting();
             Toast.makeText(getApplicationContext(), "Enabled.", Toast.LENGTH_LONG).show();
         }
     }
@@ -177,6 +181,9 @@ public class MainActivity extends AppCompatActivity {
         View header = getLayoutInflater().inflate(R.layout.header, null);
         drawerList.addHeaderView(header);
         mainActivity = this;
+        getRestrictedWebsiteHabitState = false;
+        getProlongedConversationsState = false;
+        getProlongedSittingState = true;
         NotificationsManager.handleNotifications(this, NotificationSettings.SenderId, MyHandler.class);
         registerWithNotificationHubs();
         //Populate the ListView
@@ -242,7 +249,7 @@ public class MainActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(MainActivity.this, notificationMessage, Toast.LENGTH_LONG).show();
+               Toast.makeText(MainActivity.this, "Sending signal", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -291,7 +298,7 @@ public class MainActivity extends AppCompatActivity {
         }
         Log.d(TAG, "Devices" + bluetoothSocket.getRemoteDevice() + " --- " + bluetoothSocket.isConnected());
         char dataToSend = '1';
-        sendDataToDevice(dataToSend);
+        //sendDataToDevice(dataToSend);
 
         Thread receiveDataFromDeviceThread = receiveDataFromDevice();
         receiveDataFromDeviceThread.start();
@@ -303,49 +310,58 @@ public class MainActivity extends AppCompatActivity {
         return new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    while (true) {
-                        DataInputStream inputStream;
                         try {
-                            inputStream = new DataInputStream(bluetoothSocket.getInputStream());
-                            char inData = inputStream.readChar();
+
                             Thread prolongedSittingThread = new Thread(new Runnable(){
                                 @Override
                                 public void run() {
+
                                     try {
-                                        BluetoothSocket socket = bluetoothSocket;
+                                        DataInputStream inputStream = new DataInputStream(bluetoothSocket.getInputStream());
 
-                                        Log.d(TAG, "Devices"+ socket.getRemoteDevice()+ " --- " + socket.isConnected());
-                                        //TODO: Handle sitting
-                                        char dataToSend = '1';
-                                        try {
-                                            DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream());
-                                            outputStream.writeChar(dataToSend);
-                                            String data = "http://hexis-band.azurewebsites.net/report_activity.php?habitId=4";
-                                            Log.d(TAG, "cuber  " +data);
-                                            OkHttpClient client = new OkHttpClient();
+                                        while (true) {
+                                            byte DataIn = 'e';
+                                            DataIn = (byte) inputStream.readChar();
 
-                                            Request request = new Request.Builder()
-                                                    .url(data)
-                                                    .build();
+                                            if (DataIn  == 'e'){
+                                                continue;
+                                            }else{
+                                                Log.d(TAG, "Data rec: "+DataIn );
+                                                BluetoothSocket socket = bluetoothSocket;
 
-                                            client.newCall(request).execute();
-                                        } catch (IOException e) {
-                                            e.printStackTrace();
+                                                Log.d(TAG, "Devices" + socket.getRemoteDevice() + " --- " + socket.isConnected());
+                                                //TODO: Handle sitting
+                                                char dataToSend = '1';
+                                                try {
+                                                    DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream());
+                                                    outputStream.writeChar(dataToSend);
+                                                    String data = "http://hexis-band.azurewebsites.net/report_activity.php?habitId=4";
+                                                    Log.d(TAG, "Problem ");
+                                                    OkHttpClient client = new OkHttpClient();
+
+                                                    Request request = new Request.Builder()
+                                                            .url(data)
+                                                            .build();
+
+                                                    client.newCall(request).execute();
+                                                } catch (IOException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }
+
                                         }
                                     }catch (Exception e){
                                         //Do nothing
                                     }
                                 }
                             });
-                            prolongedSittingThread.start();
-                            Log.d(TAG, "Data rec: "+inData);
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                            //prolongedSittingThread.start();
+
                         } catch (NullPointerException n){
                             Toast.makeText(getApplicationContext(), "There was a problem connecting to the device", Toast.LENGTH_LONG).show();
                         }
                     }
-                }
+
             });
     }
 

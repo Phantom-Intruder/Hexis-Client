@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Hexis Client</string>
     <string name="add_habit">Aggiungere abitudine</string>
     <string name="close_drawer">Chiudi cassetto</string>
     <string name="connect">Collegarsi al dispositivo</string>
+    <string name="cancel">Annulla</string>
+    <string name="charts">statistica</string>
+    <string name="fragment_about">attorno</string>
+    <string name="fragment_logs">Registri attività</string>
+    <string name="fragment_settings">impostazioni</string>
+    <string name="fragment_view_habits">Visualizza le abitudini</string>
+    <string name="habit_1">fumo</string>
+    <string name="habit_2">Conversioni prolungate</string>
+    <string name="habit_3">Limitare l\'accesso ai siti web</string>
+    <string name="habit_4">Seduta prolungata</string>
+    <string name="habit_details">Dettagli di abitudine</string>
+    <string name="habit_type">Tipo di abitudine</string>
+    <string name="language">Lingua</string>
+    <string name="no_habits">Nessun registro da visualizzare</string>
+    <string name="notifications">notifiche</string>
+    <string name="open">Aperto</string>
+    <string name="open_drawer">Aprire il cassetto</string>
+    <string name="save">Salvare</string>
+    <string name="sync_with_server">Sincronizzazione con il server</string>
+    <string name="updates">Aggiornamenti di stato di facebook</string>
+    <string name="visit_our_site">Visita il nostro sito</string>
 </resources>

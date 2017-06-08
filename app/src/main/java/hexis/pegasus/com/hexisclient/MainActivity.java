@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 import android.app.Fragment;
@@ -30,11 +31,15 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ToggleButton;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.UUID;
 
 import okhttp3.OkHttpClient;
@@ -60,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
     public static Boolean isVisible = false;
     private static final String TAG = "MainActivity";
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+    private static Timer timer;
 
     Fragment viewFragment;
     Fragment settingsFragment;
@@ -68,8 +74,10 @@ public class MainActivity extends AppCompatActivity {
     public void turnOnRestrictWebsiteAccess(View view) {
         getRestrictedWebsiteHabitState = !getRestrictedWebsiteHabitState;
         if (!getRestrictedWebsiteHabitState){
+            Log.d(TAG,"Off");
             Toast.makeText(getApplicationContext(), "Disabled. Disable extension to prevent alerts", Toast.LENGTH_LONG).show();
         }else{
+            Log.d(TAG,"On");
             Toast.makeText(getApplicationContext(), "Enabled. Enable extension to get alerts", Toast.LENGTH_LONG).show();
         }
     }
@@ -108,8 +116,10 @@ public class MainActivity extends AppCompatActivity {
     public void turnOnConversationRestriction(View view) {
         getProlongedConversationsState = !getProlongedConversationsState;
         if (!getProlongedConversationsState){
+            Log.d(TAG,"Off");
             Toast.makeText(getApplicationContext(), "Disabled.", Toast.LENGTH_LONG).show();
         }else{
+            Log.d(TAG,"On");
             Toast.makeText(getApplicationContext(), "Enabled.", Toast.LENGTH_LONG).show();
         }
     }
@@ -119,10 +129,12 @@ public class MainActivity extends AppCompatActivity {
         getProlongedSittingState = !getProlongedSittingState;
         if (!getProlongedSittingState){
             HabitThreads prolongedSittingThread = new HabitThreads();
-            prolongedSittingThread.IsMonitoringSitting();
+                prolongedSittingThread.IsMonitoringSitting();
+            Log.d(TAG,"Off");
             Toast.makeText(getApplicationContext(), "Disabled.", Toast.LENGTH_LONG).show();
         }else{
             HabitThreads prolongedSittingThread = new HabitThreads();
+            Log.d(TAG,"On");
             prolongedSittingThread.IsMonitoringSitting();
             Toast.makeText(getApplicationContext(), "Enabled.", Toast.LENGTH_LONG).show();
         }
@@ -132,8 +144,10 @@ public class MainActivity extends AppCompatActivity {
         //TODO: Send the data to the device
         getSmokingState = !getSmokingState;
         if (!getSmokingState){
+            Log.d(TAG,"Off");
             Toast.makeText(getApplicationContext(), "Disabled.", Toast.LENGTH_LONG).show();
         }else{
+            Log.d(TAG,"On");
             Toast.makeText(getApplicationContext(), "Enabled.", Toast.LENGTH_LONG).show();
         }
     }
@@ -184,6 +198,7 @@ public class MainActivity extends AppCompatActivity {
         getRestrictedWebsiteHabitState = false;
         getProlongedConversationsState = false;
         getProlongedSittingState = true;
+
         NotificationsManager.handleNotifications(this, NotificationSettings.SenderId, MyHandler.class);
         registerWithNotificationHubs();
         //Populate the ListView
@@ -293,7 +308,18 @@ public class MainActivity extends AppCompatActivity {
         bluetoothSocket = temporaryBluetoothSocket;
         try {
             bluetoothSocket.connect();
+            Log.d(TAG,"Connected");
+                        Toast.makeText(getApplicationContext(), "Connected to the device", Toast.LENGTH_LONG).show();
+
+
+
         } catch (IOException e) {
+           try{
+               Toast.makeText(getApplicationContext(), "App did not connect with device", Toast.LENGTH_LONG).show();
+           }catch (Exception ignored){
+
+           }
+
             e.printStackTrace();
         }
         Log.d(TAG, "Devices" + bluetoothSocket.getRemoteDevice() + " --- " + bluetoothSocket.isConnected());
@@ -366,15 +392,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void sendDataToDevice(char dataToSend) {
-        try {
-            DataOutputStream outputStream = new DataOutputStream(bluetoothSocket.getOutputStream());
-            outputStream.writeChar(dataToSend);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     private BluetoothSocket createBluetoothSocket(BluetoothDevice device, BluetoothSocket tmp, UUID MY_UUID) {
         try {
             tmp = device.createRfcommSocketToServiceRecord(MY_UUID);
@@ -439,6 +456,11 @@ public class MainActivity extends AppCompatActivity {
                     fragment = aboutFragment;
                 }
                 break;
+            case 4:
+                //TODO: Add code to toggle beeper
+                break;
+            case 5:
+                //TODO: Add code to toggle buzzer
             default:
                 if (viewFragment == null) {
                     viewFragment = new ViewFragment();

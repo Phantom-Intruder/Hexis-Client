@@ -34,16 +34,7 @@ class HabitThreads {
                     try {
                         DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream());
                         outputStream.writeChar(dataToSend);
-                        String data = "http://hexis-band.azurewebsites.net/report_activity.php?habitId=3";
-                        Log.d(TAG, "asdfcasfdfsdvfsdvaewr: website  ");
 
-                        OkHttpClient client = new OkHttpClient();
-
-                        Request request = new Request.Builder()
-                                .url(data)
-                                .build();
-
-                        client.newCall(request).execute();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -97,7 +88,7 @@ class HabitThreads {
                 BluetoothSocket socket = bluetoothSocket;
 
                 //TODO: Handle talking
-                char dataToSend = '2';
+                char dataToSend = '1';
                 try {
                     DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream());
                     outputStream.writeChar(dataToSend);

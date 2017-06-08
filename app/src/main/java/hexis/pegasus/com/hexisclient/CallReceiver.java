@@ -49,7 +49,7 @@ public class CallReceiver extends PhonecallReceiver {
                     if (!getCallEnded()) {
 
                         boolean conversationState = MainActivity.getProlongedConversationsState;
-
+                        Log.d(TAG, "oemiw4rhnigewtr");
                         if (conversationState) {
                             Log.d(TAG, "Call stateC" + getCallEnded() + " --- ");
                             HabitThreads prolongedConversation = new HabitThreads();
@@ -72,9 +72,12 @@ public class CallReceiver extends PhonecallReceiver {
         Log.d(TAG, "Call stateC"+getCallEnded());
         CallReceiver.timer.cancel();
         CallReceiver.timer.purge();
+        if (!MainActivity.getProlongedConversationsState){
+            //Do nothing
+        }else{
         HabitThreads prolongedConversationOff = new HabitThreads();
         prolongedConversationOff.talkedForTooLongOff();
-    }
+    }}
 
     @Override
     protected void onOutgoingCallStarted(Context ctx, String number, Date start)

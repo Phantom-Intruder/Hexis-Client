@@ -36,6 +36,7 @@ public class HabitNotificationService extends FirebaseMessagingService {
 
         if (websiteState) {
             v.vibrate(400);
+
             HabitThreads restrictedWebsite = new HabitThreads();
             restrictedWebsite.visitedRestrictedWebsite();
         }

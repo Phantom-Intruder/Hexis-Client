@@ -106,7 +106,7 @@ public class StatisticsActivity extends AppCompatActivity {
         for (int i=0; i <= logData.length-1; i++ ){
             int data = Character.getNumericValue(logData[i].charAt(6));
             graphData[i] = data;
-            Log.d(TAG, "dsfsdf "+ i + " sfsdf " + logData.length + " adsd " + graphData[i] + " dfs" + data);
+            Log.d(TAG, "Data  "+ i + " ," + logData.length + " ," + graphData[i] + " ," + data);
         }
 
         // Set the ArrayAdapter as the ListView's adapter.
@@ -137,7 +137,7 @@ public class StatisticsActivity extends AppCompatActivity {
     public void pressed(View view) {
         GraphView graph = (GraphView) findViewById(R.id.graph);
         if (graph == null){
-            Log.d(TAG, "Null stuff");
+            Log.d(TAG, "Null");
         }
 
         for (int i=0; i < graphData.length; i++ ){
@@ -148,15 +148,15 @@ public class StatisticsActivity extends AppCompatActivity {
         int second =0;
         int third =0;
         for (int aGraphData : graphData) {
-            if (aGraphData == 1) {
+            if (aGraphData == 4) {
                 first++;
-            } else if (aGraphData == 2) {
+            } else if (aGraphData == 5) {
                 second++;
             } else {
                 third++;
             }
         }
-        Log.d(TAG, "qweasd"+ first + "---" + second+ "---" +third);
+        Log.d(TAG, "data values: "+ first + "---" + second+ "---" +third);
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
                 new DataPoint(1, first),
                 new DataPoint(2, second),
